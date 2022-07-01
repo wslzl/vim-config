@@ -1,26 +1,26 @@
 " General {
-	set shortmess=atI
+    set shortmess=atI
     set nocompatible                " 关闭 vi 兼容模式
-	
-	set t_Co=256
-	set background=dark
-	set showmatch
+    set t_Co=256
+    syntax  enable
+    syntax on
+    set background=dark
+    set showmatch
 
-	syntax on                   	" Syntax highlighting
-    set mouse=a                 	" Automatically enable mouse usage
-    set mousehide               	" Hide the mouse cursor while typing
+    set mouse=a                     " Automatically enable mouse usage
+    set mousehide                   " Hide the mouse cursor while typing
     scriptencoding utf-8
-	set history=1000                " Store a ton of history
-	set spell                       " Spell checking on
-    set hidden						" Allow buffer switching without saving
+    set history=1024                " Store a ton of history
+    set spell                       " Spell checking on
+    set hidden                      " Allow buffer switching without saving
     set nobackup                    " 覆盖文件时不备份
     set autochdir                   " 自动切换当前目录为当前文件所在的目录
     set backupcopy=yes              " 设置备份时的行为为覆盖
-    set noerrorbells " 关闭错误信息响铃
+    set noerrorbells                " 关闭错误信息响铃
 " }
 
 " Vim UI {
-	set tabpagemax=15               " Only show 15 tabs
+    set tabpagemax=15               " Only show 15 tabs
     set showmode                    " Display the current mode
 
     set cursorline                  " Highlight current line
@@ -29,14 +29,14 @@
     highlight clear LineNr          " Current line number row will have same background color in relative mode
     "highlight clear CursorLineNr   " Remove highlight color from current line number
 
-	set ruler                       " Show the ruler
-	set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " A ruler on steroids
-	set showcmd                 	" Show partial commands in status line and
+    set ruler                       " Show the ruler
+    set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " A ruler on steroids
+    set showcmd                     " Show partial commands in status line and
                                     " Selected characters/lines in visual mode
     set guioptions-=T " 隐藏工具栏
     set guioptions-=m " 隐藏菜单栏
 
-	set backspace=indent,eol,start  " Backspace for dummies
+    set backspace=indent,eol,start  " Backspace for dummies
     set linespace=0                 " No extra spaces between rows
     set number                      " Line numbers on
     set showmatch                   " Show matching brackets/parenthesis
@@ -45,8 +45,6 @@
     set winminheight=0              " Windows can be 0 line high
     set ignorecase                  " Case insensitive search
     set smartcase                   " Case sensitive when uc present
-    set wildmenu                    " Show list instead of just completing
-    set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest common part, then all.
     set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
     set scrolljump=5                " Lines to scroll when cursor leaves screen
     set scrolloff=3                 " Minimum lines to keep above and below cursor
@@ -71,22 +69,30 @@
     setlocal foldlevel=1            " 设置折叠层数为
 "}
 
+" encoding {
+    set encoding=utf-8
+" }
+
 "Auto Complete {
-	:inoremap ( ()<ESC>i
-	:inoremap ) <c-r>=ClosePair(')')<CR>
-	:inoremap { {<CR>}<ESC>O
-	:inoremap } <c-r>=ClosePair('}')<CR>
-	:inoremap [ []<ESC>i
-	:inoremap ] <c-r>=ClosePair(']')<CR>
-	:inoremap " ""<ESC>i
-	:inoremap ' ''<ESC>i
-	function! ClosePair(char)
-		if getline('.')[col('.') - 1] == a:char
-			return "\<Right>"
-		else
-			return a:char
-		endif
-	endfunction	
+    set wildmenu                    " Show list instead of just completing
+    set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest common part, then all.
+    set completeopt-=preview
+
+    :inoremap ( ()<ESC>i
+    :inoremap ) <c-r>=ClosePair(')')<CR>
+    :inoremap [ []<ESC>i
+    :inoremap ] <c-r>=ClosePair(']')<CR>
+    :inoremap { {<CR>}<ESC>O
+    :inoremap } <c-r>=ClosePair('}')<CR>
+    :inoremap ' ''<ESC>i
+    :inoremap " ""<ESC>i
+    function! ClosePair(char)
+        if getline('.')[col('.') - 1] == a:char
+            return "\<Right>"
+        else
+            return a:char
+        endif
+    endfunction
 "}
 
 " Plugins {
